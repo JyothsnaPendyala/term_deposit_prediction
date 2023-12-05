@@ -44,8 +44,8 @@ def visualise_data():
         # fig.show()
         fig.write_image(f"{i}_hist.jpg")
         # a.append(fig)
-
-    df=dataset.drop("y",axis=1)
+    columns_to_drop = ['management', 'y']
+    df = dataset.drop(columns=columns_to_drop, axis=1, inplace=True)
     y=df.corr().columns.tolist()
     z=df.corr().values.tolist()
     z_text = np.around(z, decimals=4) # Only show rounded value (full value on hover)
