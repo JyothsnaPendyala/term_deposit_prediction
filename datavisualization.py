@@ -6,7 +6,7 @@ import matplotlib.pyplot as plt
 from extract_data import load_data
 import pandas as pd
 import plotly.express as px
-# from IPython.display import Image
+from IPython.display import Image
 import warnings
 warnings.filterwarnings("ignore")
 import numpy as np
@@ -46,6 +46,7 @@ def visualise_data():
         # a.append(fig)
     columns_to_drop = ['y']
     df = dataset.drop(columns=columns_to_drop, axis=1, inplace=True)
+    print("DFGHJKLPOIUYTR-------------",df.head)
     y=df.corr().columns.tolist()
     z=df.corr().values.tolist()
     z_text = np.around(z, decimals=4) # Only show rounded value (full value on hover)
