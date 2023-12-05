@@ -21,7 +21,7 @@ a =[]
 categ = []
 numer = []
 def visualise_data():  
-    dataset = data_preprocess()
+    dataset, numerical_features = data_preprocess()
     print("dataset------------", dataset)
     col=list(dataset.columns)
     col.remove("y")
@@ -46,7 +46,8 @@ def visualise_data():
         # a.append(fig)
     # columns_to_drop = ['y']
     print(":::::::::::::::::",dataset.head())
-    df = dataset.drop('y', axis=1)
+    # df = dataset.drop('y', axis=1)
+    df = dataset[numerical_features]
     print("DFGHJKLPOIUYTR-------------",df)
     y=df.corr().columns.tolist()
     z=df.corr().values.tolist()
