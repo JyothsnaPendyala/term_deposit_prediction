@@ -45,7 +45,8 @@ def visualise_data():
         fig.write_image(f"{i}_hist.jpg")
         # a.append(fig)
     # columns_to_drop = ['y']
-    df = dataset.drop('y', axis=1, inplace=True)
+    print(":::::::::::::::::",dataset.head())
+    df = dataset.drop('y', axis=1)
     print("DFGHJKLPOIUYTR-------------",df)
     y=df.corr().columns.tolist()
     z=df.corr().values.tolist()
