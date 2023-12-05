@@ -23,6 +23,6 @@ def data_preprocess():
     #visualize the numerical variables
     #df[numerical_features].head()
     
-    return df
+    return df, numerical_features
     
 data_preprocess()    
