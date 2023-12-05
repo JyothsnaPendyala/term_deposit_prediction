@@ -46,7 +46,7 @@ def visualise_data():
         # a.append(fig)
     columns_to_drop = ['y']
     df = dataset.drop(columns=columns_to_drop, axis=1, inplace=True)
-    print("DFGHJKLPOIUYTR-------------",df.head())
+    print("DFGHJKLPOIUYTR-------------",df)
     y=df.corr().columns.tolist()
     z=df.corr().values.tolist()
     z_text = np.around(z, decimals=4) # Only show rounded value (full value on hover)
