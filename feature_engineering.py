@@ -11,6 +11,17 @@ def feature_engineering():
     df_balanced = pd.concat([y_yes_over,y_no], axis=0)
     df_balanced['y'].groupby(df_balanced['y']).count()
     df2=df_balanced.copy()
+    df2.replace({'job':{'management':0,'technician':1,'entrepreneur':2,'blue-collar':3,'unknown':4,'retired':5,'admin.':6,'services':7,'self-employed':8,'unemployed':9,'housemaid':10,'student':11}},inplace=True)
+    df2.replace({'marital':{'single':0,'married':1,'divorced':2,'unknown':3}},inplace=True)
+    df2.replace({'education':{'primary':0,'secondary':1,'tertiary':2,'unknown':3}},inplace=True)
+    df2.replace({'contact':{'cellular':0,'telephone':1,'unknown':2}},inplace=True)
+    df2.replace({'month':{'jan':0,'feb':1,'mar':2,'apr':3,'may':4,'jun':5,'jul':6,'aug':7,'sep':8,'oct':9,'nov':10,'dec':11}},inplace=True)
+    df2.replace({'poutcome':{'failure':0,'success':1,'unknown':2,'other':3}},inplace=True)
+    bool_columns = ['housing', 'loan', 'y']
+    for col in  bool_columns:
+        df2[col+'_new']=df2[col].apply(lambda x : 1 if x == 'yes' else 0)
+        df2.drop(col, axis=1, inplace=True)
+    
     #defaut features does not play imp role
     df2.groupby(['y','default']).size()
     df2.drop(['default'],axis=1, inplace=True)
@@ -27,14 +38,11 @@ def feature_engineering():
     df3.groupby(['y','campaign'],sort=True)['campaign'].count()
     df3.groupby(['y','previous'],sort=True)['previous'].count()
     df4 = df3[df3['previous'] < 50]
-    df3.groupby(['y','previous'],sort=True)['previous'].count()
-    cat_columns = ['job', 'marital', 'education', 'contact', 'month', 'poutcome']
-    for col in  cat_columns:
-        df4 = pd.concat([df4.drop(col, axis=1),pd.get_dummies(df4[col], prefix=col, prefix_sep='_',drop_first=True, dummy_na=False)], axis=1)
-    bool_columns = ['housing', 'loan', 'y']
-    for col in  bool_columns:
-        df4[col+'_new']=df4[col].apply(lambda x : 1 if x == 'yes' else 0)
-        df4.drop(col, axis=1, inplace=True)
+    df4.groupby(['y','previous'],sort=True)['previous'].count()
+    # cat_columns = ['job', 'marital', 'education', 'contact', 'month', 'poutcome']
+    # for col in  cat_columns:
+    #     df4 = pd.concat([df4.drop(col, axis=1),pd.get_dummies(df4[col], prefix=col, prefix_sep='_',drop_first=True, dummy_na=False)], axis=1)
+    
     dataset = df4.to_csv('bank_term_deposit_prediction_clean_data.csv',index=False)
     return dataset
 
