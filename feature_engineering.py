@@ -43,7 +43,7 @@ def feature_engineering():
     # for col in  cat_columns:
     #     df4 = pd.concat([df4.drop(col, axis=1),pd.get_dummies(df4[col], prefix=col, prefix_sep='_',drop_first=True, dummy_na=False)], axis=1)
     
-    dataset = df4.to_csv('bank_term_deposit_prediction_clean_data.csv',index=False)
+    dataset = df4.to_csv('cleaned_data.csv',index=False)
     return dataset
 
 feature_engineering()
