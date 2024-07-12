@@ -1,37 +1,16 @@
 pipeline{
     agent any
-
-    stages{
-        stage("Extract Data"){
-            steps{
-                sh 'python3 extract_data.py'
-            }
-        }
-        stage("Data Analysis"){
-            steps{
-                sh 'python3 data_analysis.py'
-            }
-        }
-        stage("Data Preprocessing"){
-            steps{
-                sh 'python3 data_preprocessing.py'
-            }
-        }
-        stage("Data Visualization"){
-            steps{
-                sh 'python3 datavisualization.py'
-            }
-        }
-        stage("Feature Engineering"){
-            steps{
-                sh 'python3 feature_engineering.py'
-            }
-        }
+    environment{
+        airflow_url = credentials('airflow_url')
+        airflow_username = credentials('airflow_username')
+        airflow_password = credentials('airflow_password')
     }
-    post{
-       
-        always {
-            archiveArtifacts artifacts: 'bank_term_deposit_prediction_clean_data.csv', onlyIfSuccessful: true
-        }
+    stages{
+        
+        stage("Trigger Airflow Dag"){
+            steps{
+                 sh "python3 trigger_airflow_dag.py"
+                }
             }
+        }
 }
