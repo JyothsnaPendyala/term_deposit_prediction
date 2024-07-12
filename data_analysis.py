@@ -1,4 +1,4 @@
-from extract_data import load_data
+from data_extraction import load_data
 def data_analysis():
     dataset = load_data()
    # Providing the details of data 
