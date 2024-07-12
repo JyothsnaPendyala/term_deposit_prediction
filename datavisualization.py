@@ -3,7 +3,7 @@ import pandas as pd
 import numpy as np
 import seaborn as sns
 import matplotlib.pyplot as plt
-from extract_data import load_data
+from data_extraction import load_data
 import pandas as pd
 import plotly.express as px
 from IPython.display import Image
